@@ -1,3 +1,4 @@
+import interfaces.*;
 public class Core implements Game
 {
     private char field[][];

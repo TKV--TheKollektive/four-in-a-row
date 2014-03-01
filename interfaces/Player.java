@@ -1,3 +1,4 @@
+package interfaces;
 public interface Player
 {
     // void init() = constructor?

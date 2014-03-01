@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.params=p1\ p2\ x\ y
-comment0.target=Core(Player,\ Player,\ int,\ int)
+comment0.target=Core(interfaces.Player,\ interfaces.Player,\ int,\ int)
 comment1.params=p1\ p2\ x\ y
-comment1.target=void\ init(Player,\ Player,\ int,\ int)
+comment1.target=void\ init(interfaces.Player,\ interfaces.Player,\ int,\ int)
 comment2.params=x\ y
 comment2.target=char\ getField(int,\ int)
 comment3.params=number

@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.params=p1\ p2\ xSize\ ySize
-comment0.target=void\ init(Player,\ Player,\ int,\ int)
-comment1.params=x\ y
-comment1.target=char\ getField(int,\ int)
-comment2.params=number
-comment2.target=java.lang.String\ getPlayerName(int)
-numComments=3
