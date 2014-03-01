@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=p1\ p2\ x\ y
+comment0.target=Core(Player,\ Player,\ int,\ int)
+comment1.params=p1\ p2\ x\ y
+comment1.target=void\ init(Player,\ Player,\ int,\ int)
+comment2.params=x\ y
+comment2.target=char\ getField(int,\ int)
+comment3.params=number
+comment3.target=java.lang.String\ getPlayerName(int)
+comment4.params=
+comment4.target=char\ checkWin()
+comment5.params=row\ colour
+comment5.target=boolean\ throwIn(int,\ char)
+numComments=6

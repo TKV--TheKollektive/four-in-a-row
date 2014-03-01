@@ -1,0 +1,9 @@
+public interface Player
+{
+    // void init() = constructor?
+    void init(char colour, Game game); // R=red,Y=yellow
+    void activate(); 
+    void endGame(boolean win);
+    String getMyName();
+    void setNumber(int number);
+}
