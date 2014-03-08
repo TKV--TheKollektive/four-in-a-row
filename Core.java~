@@ -89,7 +89,7 @@ public class Core implements Game
                 player2.activate();
                 activePlayer = 1;
             }
-            int winner = Libgame.checkwin(field);
+            int winner = Libgame.checkwin();
             if(winner == 1){
                     player1.endGame(true);
                     player2.endGame(false);
