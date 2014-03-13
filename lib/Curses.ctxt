@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=x\ y
+comment0.target=void\ initscr(int,\ int)
+comment1.params=
+comment1.target=void\ refresh()
+comment2.params=string
+comment2.target=void\ addstr(java.lang.String)
+comment3.params=x\ y
+comment3.target=void\ move(int,\ int)
+comment4.params=x\ y\ string
+comment4.target=void\ mvaddstr(int,\ int,\ java.lang.String)
+comment5.params=character\ y
+comment5.target=void\ horizontalLine(char,\ int)
+numComments=6
