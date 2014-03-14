@@ -1,22 +1,22 @@
 package lib;
-
+import java.io.*;
 
 /**
- * Write a description of class Curses here.
+ * Tiny class that implements the basic functionality of <curses.h> in pure java
  * 
- * @author (your name) 
- * @version (a version number or a date)
  */
  public class Curses
 {
-    // instance variables - replace the example below with your own
      private static char screen[][];
      private static int xSize;
      private static int ySize;
      private static int xPos;
      private static int yPos;
-    
-     public static void initscr(int x, int y){
+     
+    /**
+     * Initialises the screen.
+     */
+     public static void initscr(int y, int x){
         xSize = x;
         ySize = y;
         screen=new char[ySize][xSize];
@@ -27,14 +27,34 @@ package lib;
         }
     }
     
+    /**
+     * Returns the horizontal size.
+     */
+    public static int getXSize(){
+        return xSize;
+    }
+    
+    /**
+     * Returns the vertical size.
+     */
+    public static int getYSize(){
+        return ySize;
+    }
+    
+    /**
+     * Prints modified screen on console. 
+     */
      public static void refresh(){
-        System.out.print("\u000c");
+        System.out.println("\u000c");
         for (int i = 0; i < ySize; i++){
-            for(int j = 0; j < ySize; j++)System.out.print(screen[i][j]);
+            for(int j = 0; j < xSize; j++)System.out.print(screen[i][j]);
             System.out.println("");
         }
     }
-
+    
+    /**
+     * Adds a string to the actual position.
+     */
      public static void addstr(String string){
         for (int i = 0; i < string.length(); i++){
             if(xPos < xSize){   
@@ -50,17 +70,91 @@ package lib;
         }
     }
     
+    /**
+     * Moves to specific position.
+     */
      public static void move(int x, int y){
         xPos = x;
         yPos = y;
     }
     
+    /**
+     * Moves to a specified position and adds a string of text.
+     */
      public static void mvaddstr(int x, int y, String string){
         move(x,y);
         addstr(string);
     }
     
-    public static void horizontalLine(char character, int y){
-        for(int i=0; i < xSize; i++)screen[y][i]=character;
+    /**
+     * Draws a horizontal line.
+     */
+    public static void horizontalLine(char character, int y, int start, int end){
+        if(end > xSize)end = xSize;
+        for(int i=start; i < end; i++)screen[y][i]=character;
+    }
+    
+    /**
+     * Draws a vertical line.
+     */
+    public static void verticalLine(char character, int x, int start, int end){
+        if(end > xSize)end = xSize;
+        for(int i=start; i < end; i++)screen[i][x]=character;
+    }
+    
+    /**
+     * Draws a frame around the screen.
+     */
+    public static void drawFrame(char horizontalChar, char verticalChar, char corners){
+        screen[0][0]= corners;
+        screen[0][xSize-1] = corners;
+        screen[ySize-1][0] = corners;
+        screen[ySize-1][xSize-1] = corners;
+        verticalLine(verticalChar,0,1,ySize-1);
+        verticalLine(verticalChar,xSize-1,1,ySize-1);
+        horizontalLine(horizontalChar,0,1,xSize-1);
+        horizontalLine(horizontalChar,ySize-1,1,xSize-1);
+    }
+    
+    /**
+     * Draws a window onto the screen.
+     */
+    public static void window(int x1, int y1, int x2, int y2, String title){
+
+        verticalLine('|',x1,y1,y2);
+        verticalLine('|',x2,y1,y2);
+        horizontalLine('-',y1,x1,x2);
+        horizontalLine('-',y2,x1,x2);
+        mvaddstr(x1+2,y1,"| " + title + " |");
+        screen[y1][x1] = '+';
+        screen[y1][x2] = '+';
+        screen[y2][x1] = '+';
+        screen[y2][x2] = '+';
+    }
+    
+    public static void delArea(int x1, int y1, int x2, int y2){
+        for (int i = y1; i <= y2; i++){
+            for(int j = x1; j <= x2; j++)screen[i][j]= ' ';
+        }        
+    }
+    /**
+     * Prints the screen to console and asks for text.
+     */
+    public static String readline(String question) {
+        String read = "";
+        while(read.length() == 0){
+            refresh();
+            System.out.print(question);
+            try {
+                BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(System.in));
+                read = bufferedreader.readLine();
+            } catch (IOException ioe) {
+                window(15,10,44,14,"Error");
+                mvaddstr(16,12,"IO-Error reading System.in");
+                //System.exit(1);
+                return "0";
+            }
+        }
+        return read;
     }
 }
