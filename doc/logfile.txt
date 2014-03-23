@@ -16,9 +16,9 @@ Class documentation
 -d
 /home/christian/four-in-a-row/doc
 -encoding
-UTF-8
+windows-1252
 -charset
-UTF-8
+windows-1252
 -docletpath
 /usr/share/bluej/bjdoclet.jar
 -doclet

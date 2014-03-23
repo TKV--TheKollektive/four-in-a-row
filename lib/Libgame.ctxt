@@ -1,5 +1,12 @@
 #BlueJ class context
 comment0.params=toCheck
 comment0.target=int\ checkwin(int[][])
-comment0.text=\n\ Checks,\ if\ someone\ has\ won.\n
-numComments=1
+comment1.params=
+comment1.target=int\ siegerueberpruefung()
+comment2.params=
+comment2.target=int\ wagerechtueberpruefung()
+comment3.params=
+comment3.target=int\ senkrechtueberpruefung()
+comment4.params=
+comment4.target=int\ diagonalueberpruefung()
+numComments=5

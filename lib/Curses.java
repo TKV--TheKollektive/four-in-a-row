@@ -131,7 +131,9 @@ import java.io.*;
         screen[y2][x1] = '+';
         screen[y2][x2] = '+';
     }
-    
+    /**
+     *  Deletes an Area of the screen.
+     */
     public static void delArea(int x1, int y1, int x2, int y2){
         for (int i = y1; i <= y2; i++){
             for(int j = x1; j <= x2; j++)screen[i][j]= ' ';
@@ -156,5 +158,23 @@ import java.io.*;
             }
         }
         return read;
+    }
+    
+    /**
+     * Prints the screen to Console and asks for an Integer
+     */
+    public static int readInt(String question){
+        int read = Integer.parseInt(readline(question));
+        return read;
+    }
+    
+    /**
+     * Shows a menu
+     */
+    public static int menu(String caption, String question, String options[], int x, int y){
+        window(x,y,x+question.length()+2,y+3+options.length, caption);
+        mvaddstr(x+1,y+1,question);
+        for(int i = 0; i < options.length; i++)mvaddstr(x+1,y+2+i,"[" + i + "] " + options[i]);
+        return readInt(">");
     }
 }
