@@ -6,11 +6,10 @@ public class KI implements Player
     private String name = "TKV-4WIN"; 
     private Game gam;
     private int nr;
-    private int throwinRow;
     private int throwin;
     private int ySize = 6;
     private int xSize = 7;
-    private int [][] fieldi = new int [ySize][xSize];
+    private int [][] fieldi = new int [xSize][ySize];
     private int [] fillingsi = new int[7]; 
     private int [] assessment = new int[7];
     private int thinkahead=10;
@@ -20,8 +19,18 @@ public class KI implements Player
     {
         gam = game;
         nr=colour;
+        if(nr==1){spnr2=2;}
+        else {spnr2=1;}
+        throwin=3;//Wird später rausgenommen
     }
-    public void activate(){gam.throwIn(throwinRow,nr);}
+    
+    public void activate()
+    {
+        throwinRow();
+        gam.throwIn(throwin,nr);
+    }
+    
+    
     public void endGame(int winner){}
     public String getMyName(){return name;}
     public void setNumber(int number){nr = number;}
@@ -40,41 +49,33 @@ public class KI implements Player
         assessment[6]=0;
         
         
+        
+        
         for(int i=0;i<7;i++)
         {
             fillingsi[i]=gam.getFillings(i);
-            for(int j=0;j<6;j++){ fieldi[j][i]=gam.getField(i,j);}
+            for(int j=0;j<6;j++){ fieldi[i][j]=gam.getField(i,j);}
         }
-        if (canIwin(fillingsi,fieldi)==true){}
-        else if (canUwin(fillingsi,fieldi)==true){}
-        else {dobestturn();}
-        return throwin;    
+        if (canPlayerWin(nr,fillingsi,fieldi)==true){return throwin;}
+        else if (canPlayerWin(spnr2,fillingsi,fieldi)==true){return throwin;    }
+        else {dobestturn();return throwin;}
+           
     }
     
-    private boolean canIwin(int []filling,int [][]field)
+    public boolean canPlayerWin(int player,int []filling,int[][]field)
     {
-        if (wagerechtueberpruefung(filling,field,nr)==true){return true;}
-        else if (senkrechtueberpruefung(filling,field,nr)==true){return true;}
-        else if (diagonalueberpruefung(filling,field,nr)==true){return true;}
-        return false;
-    }
-    
-    private boolean canUwin(int []filling,int [][]field)
-    {
-         
-        if(nr==1){spnr2=2;}
-        else {spnr2=1;}
-        if (wagerechtueberpruefung(filling,field,spnr2)==true){return true;}
-        else if (senkrechtueberpruefung(filling,field,spnr2)==true){return true;}
-        else if (diagonalueberpruefung(filling,field,spnr2)==true){return true;}
-        return false;
+        
+        if (wagerechtueberpruefung(filling,field,player)==true){return true;}
+        else if (senkrechtueberpruefung(field,player)==true){return true;}
+        else if (diagonalueberpruefung(filling,field,player)==true){return true;}
+        else {return false;}
     }
     
     private boolean wagerechtueberpruefung(int []filling,int [][]field,int colour)
     {
         int [][]tocheckfiel = field;
         
-        for(int i=5;i>=0;i--)
+        for(int i=0;i<6;i++)
         {
            for(int j=0;j<=3;j++)
            {
@@ -124,19 +125,18 @@ public class KI implements Player
         return false;
     }
     
-    private boolean senkrechtueberpruefung(int []filling,int [][]field,int colour)
+    private boolean senkrechtueberpruefung(int [][]field,int colour)
     {
         int [][]tocheckfiel = field;
         
-        for(int i=0;i<7;i++)
+        for(int i=0;i<6;i++)
         {
             for(int j = 0;j<3;j++)
             {
                 if(tocheckfiel[i][j]==colour &&
                 tocheckfiel[i][j+1]==colour &&
                 tocheckfiel[i][j+2]==colour &&
-                tocheckfiel[i][j+3]==0 &&
-                filling[i]<6)
+                tocheckfiel[i][j+3]==0)
                 {
                     throwin=i;
                     return true;
@@ -202,7 +202,7 @@ public class KI implements Player
         
         for(int i=5;i>2;i--)
         {
-            for(int j=0;j<=3;j++)
+            for(int j=0;j<4;j++)
             {
                 if(tocheckfiel[j][i]==0 &&
                    tocheckfiel[(j+1)][(i-1)]==colour &&
@@ -258,6 +258,7 @@ public class KI implements Player
         
         if(nr==1){spnr2=2;}
         else {spnr2=1;}
+        
         for (int i=0;i<7;i++)
         {
             fillingsclone[turns]= fillingsi.clone();
@@ -265,24 +266,24 @@ public class KI implements Player
             
             throwinKI(fillingsclone[turns],fieldclone[turns],i,nr);
                     
-                if (canUwin(fillingsclone[turns],fieldclone[turns])==true)
+                if (canPlayerWin(spnr2,fillingsclone[turns],fieldclone[turns])==true)
                 {assessment[i]=assessment[i]-30;}
                                     
-                if (canIwin(fillingsclone[turns],fieldclone[turns])==true)
+                if (canPlayerWin(nr,fillingsclone[turns],fieldclone[turns])==true)
                 {assessment[i]=assessment[i]+20;}
                                     
-                if (canIwin(fillingsclone[turns],fieldclone[turns])==false
-                &&canUwin(fillingsclone[turns],fieldclone[turns])==false)
+                if (canPlayerWin(nr,fillingsclone[turns],fieldclone[turns])==false
+                &&canPlayerWin(spnr2,fillingsclone[turns],fieldclone[turns])==false)
                 assessment[i]=assessment[i]+5;
                 
-                turns++;
+                turns = turns++;
                 
                 for (int j=0;j<7;j++)
                 {
-                    fillingsclone[turns]=fillingsclone[turns-1].clone();
-                    fieldclone[turns]=fieldclone[turns-1].clone();
-                    throwinKI(fillingsclone[turns],fieldclone[turns],j,spnr2);
-                    turns++;
+                    fillingsclone[1]=fillingsclone[0].clone();
+                    fieldclone[1]=fieldclone[0].clone();
+                    throwinKI(fillingsclone[1],fieldclone[1],j,spnr2);
+                    
                     
                     
             
@@ -294,10 +295,7 @@ public class KI implements Player
     
                                             
                                         
-                                        
-        
-    
-    private boolean throwinKI(int [] filling,int [][] field ,int row,int colour)
+     private boolean throwinKI(int [] filling,int [][] field ,int row,int colour)
     {
         return false;
     }
