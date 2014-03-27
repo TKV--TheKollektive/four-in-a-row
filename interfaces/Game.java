@@ -5,4 +5,5 @@ public interface Game
     int getField(int x, int y);
     String getPlayerName(int number);
     boolean throwIn(int row,int colour);
+    int getFillings(int row);
 }

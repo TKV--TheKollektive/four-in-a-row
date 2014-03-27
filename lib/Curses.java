@@ -175,6 +175,7 @@ import java.io.*;
         window(x,y,x+question.length()+2,y+3+options.length, caption);
         mvaddstr(x+1,y+1,question);
         for(int i = 0; i < options.length; i++)mvaddstr(x+1,y+2+i,"[" + i + "] " + options[i]);
+        refresh();
         return readInt(">");
     }
 }

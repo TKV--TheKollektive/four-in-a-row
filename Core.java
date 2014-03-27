@@ -98,4 +98,8 @@ public class Core implements Game
             }
         }
     }
-}
+    
+    public int getFillings(int row){
+        return fillings[row];
+    }
+    }

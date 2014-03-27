@@ -81,11 +81,11 @@ public class Libgame{
                 if(spielfeld[j][i]==1 &&
                    spielfeld[(j+1)][(i+1)]==1 &&
                    spielfeld[j+2][i+2]==1 &&
-                   spielfeld[j+3][j+3]==1){return 1;}//guckt ob Spieler 1 gewonnen hat und gibt dies gegebenenfalls aus
+                   spielfeld[j+3][i+3]==1){return 1;}//guckt ob Spieler 1 gewonnen hat und gibt dies gegebenenfalls aus
                 else if(spielfeld[j][i]==2 &&
                         spielfeld[(j+1)][(i+1)]==2 &&
                         spielfeld[j+2][i+2]==2 &&
-                        spielfeld[j+3][j+3]==2){return 2;}//guckt ob Spieler 2 gewonnen hat und gibt dies gegebenenfalls aus
+                        spielfeld[j+3][i+3]==2){return 2;}//guckt ob Spieler 2 gewonnen hat und gibt dies gegebenenfalls aus
                 //i und j erhoeht sich immerhalb der if bedingung,damit die diagonale ueberprueft werden kann 
             }
         }

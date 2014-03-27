@@ -7,4 +7,6 @@ comment2.params=number
 comment2.target=java.lang.String\ getPlayerName(int)
 comment3.params=row\ colour
 comment3.target=boolean\ throwIn(int,\ int)
-numComments=4
+comment4.params=row
+comment4.target=int\ getFillings(int)
+numComments=5

@@ -61,7 +61,7 @@ public class TUIPlayer implements Player
                mvaddstr(24,13,"eine ganz grosse Tüte Mitleid");
            }else{
                mvaddstr(24,11,"UNENTSCHIEDEN");
-               mvaddstr(24,12,"Schlappschwanz!");
+               //mvaddstr(24,12,"Schlappschwanz!");
            }
            printField(3,3);
            refresh();
