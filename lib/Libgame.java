@@ -33,7 +33,7 @@ public class Libgame{
     {
        for(int i=5;i>=0;i--)
        {
-           for(int j=0;j<=3;j++)
+           for(int j=0;j<3;j++)
            {
             if (spielfeld[j][i]==1 &&
                 spielfeld[(j+1)][i]==1 &&
