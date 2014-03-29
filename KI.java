@@ -1,5 +1,6 @@
 import lib.*;
 import interfaces.*;
+import java.util.Random;
 
 public class KI implements Player
 {
@@ -14,6 +15,7 @@ public class KI implements Player
     private int [] assessment = new int[7];
     private int thinkahead=10;
     int spnr2;
+    Random row = new Random();
      
     public void init(int colour, Game game)
     {
@@ -57,12 +59,18 @@ public class KI implements Player
             for(int j=0;j<6;j++){ fieldi[i][j]=gam.getField(i,j);}
         }
         if (canPlayerWin(nr,fillingsi,fieldi)==true){return throwin;}
+        
         else if (canPlayerWin(spnr2,fillingsi,fieldi)==true){return throwin;    }
-        else {dobestturn();return throwin;}
+        
+        else 
+        {
+            throwin=row.nextInt(7);
+            return throwin;
+        }
            
     }
     
-    public boolean canPlayerWin(int player,int []filling,int[][]field)
+    private boolean canPlayerWin(int player,int []filling,int[][]field)
     {
         
         if (wagerechtueberpruefung(filling,field,player)==true){return true;}

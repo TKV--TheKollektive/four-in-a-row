@@ -55,7 +55,7 @@ public class Libgame{
     {
         for(int j=5;j>=0;j--)
        {
-           for(int i=0;i<=4;i++)
+           for(int i=0;i<=2;i++)
            {
             if (spielfeld[j][i]==1 && 
                 spielfeld[j][(i+1)]==1 && 
@@ -74,7 +74,7 @@ public class Libgame{
     
     private static int diagonalueberpruefung()//diagonalueberpruefung von links nach rechts oben nach unten und unten nach oben 
     {
-        for(int i=0;i<=5;i++)
+        for(int i=0;i<3;i++)
         {
             for(int j=0;j<4;j++)
             {
@@ -92,7 +92,7 @@ public class Libgame{
         
         for(int i=5;i>2;i--)
         {
-            for(int j=0;j<=3;j++)
+            for(int j=0;j<4;j++)
             {
                 if(spielfeld[j][i]==1 &&
                    spielfeld[(j+1)][(i-1)]==1 &&
